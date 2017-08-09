@@ -1,7 +1,7 @@
 {
-  "name": "aotoo-web-widgets",
-  "version": "1.0.1",
-  "description": "aotoo 元件",
+  "name": "aotoo-rn-widgets",
+  "version": "1.0.0",
+  "description": "aotoo rn 元件",
   "main": "./build/index.js",
   "license": "MIT",
   "repository": "git+https://github.com/webkixi/aotoo.git",
