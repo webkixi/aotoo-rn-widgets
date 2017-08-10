@@ -119,6 +119,12 @@ function _list(props, stys) {
     listSty = [listSty, _listStyle];
   }
 
+  if (props.className) {
+    if (stys[props.className]) {
+      listSty = stys[props.className];
+    }
+  }
+
   return React.createElement(
     View,
     { style: listSty },

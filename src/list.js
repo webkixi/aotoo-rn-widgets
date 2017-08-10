@@ -108,6 +108,12 @@ function _list(props, stys){
     listSty = [listSty, _listStyle]
   }
 
+  if (props.className) {
+    if (stys[props.className]) {
+      listSty = stys[props.className]
+    }
+  }
+
   return <View style={listSty}><FlatList ref={getElement} {...$props} /></View>
 }
 
