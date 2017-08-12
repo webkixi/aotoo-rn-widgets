@@ -86,7 +86,7 @@ function dealWithLis(lis, $stys, _sty, clsName) {
             } else {
               var itemStyleSheet = $stys['item'] || {};
               if (item && item['className'] && $stys[item['className']]) {
-                itemStyleSheet = $stys[item['className']];
+                itemStyleSheet = $stys[item['className']]['item'];
               }
               var tempItem = myItemHeader(item, $stys, itemStyleSheet);
               return React.cloneElement(tempItem, { key: $key });
