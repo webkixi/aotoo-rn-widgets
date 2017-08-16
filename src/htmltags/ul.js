@@ -3,7 +3,7 @@ const {
   Text,
 } = require('react-native')
 
-class Ul extends React.Component {
+class Ul extends React.PureComponent {
   render() {
     return (
       <View style={this.props.style}>

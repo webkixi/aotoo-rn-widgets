@@ -12,8 +12,8 @@ var _require = require('react-native'),
     View = _require.View,
     Text = _require.Text;
 
-var Ul = function (_React$Component) {
-  _inherits(Ul, _React$Component);
+var Ul = function (_React$PureComponent) {
+  _inherits(Ul, _React$PureComponent);
 
   function Ul() {
     _classCallCheck(this, Ul);
@@ -33,7 +33,7 @@ var Ul = function (_React$Component) {
   }]);
 
   return Ul;
-}(React.Component);
+}(React.PureComponent);
 
 module.exports = Ul;
 //# sourceMappingURL=../maps/htmltags/ul.js.map

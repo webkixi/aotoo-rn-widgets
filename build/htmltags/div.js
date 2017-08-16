@@ -12,8 +12,8 @@ var _require = require('react-native'),
     View = _require.View,
     Text = _require.Text;
 
-var Div = function (_React$Component) {
-  _inherits(Div, _React$Component);
+var Div = function (_React$PureComponent) {
+  _inherits(Div, _React$PureComponent);
 
   function Div() {
     _classCallCheck(this, Div);
@@ -33,7 +33,7 @@ var Div = function (_React$Component) {
   }]);
 
   return Div;
-}(React.Component);
+}(React.PureComponent);
 
 module.exports = Div;
 //# sourceMappingURL=../maps/htmltags/div.js.map

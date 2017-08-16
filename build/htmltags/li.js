@@ -12,8 +12,8 @@ var _require = require('react-native'),
     View = _require.View,
     Text = _require.Text;
 
-var Li = function (_React$Component) {
-  _inherits(Li, _React$Component);
+var Li = function (_React$PureComponent) {
+  _inherits(Li, _React$PureComponent);
 
   function Li() {
     _classCallCheck(this, Li);
@@ -33,7 +33,7 @@ var Li = function (_React$Component) {
   }]);
 
   return Li;
-}(React.Component);
+}(React.PureComponent);
 
 module.exports = Li;
 //# sourceMappingURL=../maps/htmltags/li.js.map

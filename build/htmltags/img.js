@@ -13,8 +13,8 @@ var _require = require('react-native'),
     Text = _require.Text,
     Image = _require.Image;
 
-var Img = function (_React$Component) {
-  _inherits(Img, _React$Component);
+var Img = function (_React$PureComponent) {
+  _inherits(Img, _React$PureComponent);
 
   function Img() {
     _classCallCheck(this, Img);
@@ -52,7 +52,7 @@ var Img = function (_React$Component) {
   }]);
 
   return Img;
-}(React.Component);
+}(React.PureComponent);
 
 module.exports = Img;
 //# sourceMappingURL=../maps/htmltags/img.js.map

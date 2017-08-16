@@ -5,7 +5,7 @@ const {
   TouchableHighlight,
 } = require('react-native')
 
-class A extends React.Component {
+class A extends React.PureComponent {
   render() {
     var _props = {}
     let style = this.props.style||{}

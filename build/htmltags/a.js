@@ -16,8 +16,8 @@ var _require = require('react-native'),
     Linking = _require.Linking,
     TouchableHighlight = _require.TouchableHighlight;
 
-var A = function (_React$Component) {
-  _inherits(A, _React$Component);
+var A = function (_React$PureComponent) {
+  _inherits(A, _React$PureComponent);
 
   function A() {
     _classCallCheck(this, A);
@@ -82,7 +82,7 @@ var A = function (_React$Component) {
   }]);
 
   return A;
-}(React.Component);
+}(React.PureComponent);
 
 module.exports = A;
 //# sourceMappingURL=../maps/htmltags/a.js.map

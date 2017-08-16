@@ -4,7 +4,7 @@ const {
   Image
 } = require('react-native')
 
-class Img extends React.Component{
+class Img extends React.PureComponent{
   render(){
     if (typeof this.props.src == 'string') {
       var imgIns = () => {
