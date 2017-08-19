@@ -326,8 +326,9 @@ var Fox = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Fox.__proto__ || Object.getPrototypeOf(Fox)).call(this, props));
 
-    _this.sty = _this.props.style;
-    _this.stys = _this.props.styles;
+    _this.state = {
+      $key: $uuid('header_item_' + '_')
+    };
     return _this;
   }
 
@@ -348,18 +349,15 @@ var Fox = function (_React$Component) {
   }, {
     key: 'preRender',
     value: function preRender() {
-      return myItemHeader(this.props.item, this.stys, this.sty);
+      return myItemHeader(this.props.item, this.props.styles, this.props.style);
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
-      var $key = $uuid('header_item_' + '_');
+      var $key = this.state.$key;
       var fill = this.preRender();
-      // return (
-      //   <View style={this.sty} ref={ e=>this.element=e } key={$key}>{fill}</View>
-      // )
       return React.cloneElement(fill, { key: $key, ref: function ref(e) {
           return _this2.element = e;
         } });

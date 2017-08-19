@@ -220,8 +220,9 @@ function myItemHeader(item, _stys, _sty){
 class Fox extends React.Component {
   constructor(props) {
     super(props)
-    this.sty = this.props.style
-    this.stys = this.props.styles
+    this.state = {
+      $key: $uuid('header_item_'+'_')
+    }
   }
 
   componentDidMount() {
@@ -238,15 +239,12 @@ class Fox extends React.Component {
   }
 
   preRender(){
-    return myItemHeader(this.props.item, this.stys, this.sty)
+    return myItemHeader(this.props.item, this.props.styles, this.props.style)
   }
 
   render(){
-    const $key = $uuid('header_item_'+'_')
+    const $key = this.state.$key
     const fill = this.preRender()
-    // return (
-    //   <View style={this.sty} ref={ e=>this.element=e } key={$key}>{fill}</View>
-    // )
     return React.cloneElement(fill, {key: $key, ref: e=>this.element=e })
   }
 }
