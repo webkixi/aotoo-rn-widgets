@@ -35,13 +35,14 @@ var $uuid = function $uuid() {
   return prefix + _time;
 };
 
-function dealWithLis(lis, $stys, _sty, clsName) {
+function dealWithLis(lis, $stys, _sty, clsName, listClassName) {
   var _sty_ul = $stys['ul'] || $stys['itemLi-ul'] || {};
   var _sty_li = $stys['li'] || $stys['itemLi-li'] || {};
   var _sty_text = $stys.itemText || {};
 
-  if (clsName && $stys[clsName]) {
-    var $clsName = $stys[clsName];
+  var myClsName = clsName || listClassName;
+  if (myClsName) {
+    var $clsName = $stys[myClsName];
     _sty_ul = $clsName['ul'] || $clsName['itemLi-ul'] || _sty_ul;
     _sty_li = $clsName['li'] || $clsName['itemLi-li'] || _sty_li;
     _sty_text = $clsName['itemText'] || _sty_text;
@@ -79,7 +80,7 @@ function dealWithLis(lis, $stys, _sty, clsName) {
           break;
         case 'object':
           if (Array.isArray(item)) {
-            return dealWithLis(item, $stys, _sty, clsName);
+            return dealWithLis(item, $stys, _sty, clsName, listClassName);
           } else {
             if (React.isValidElement(item)) {
               return React.cloneElement(item, { key: $key });
@@ -88,7 +89,7 @@ function dealWithLis(lis, $stys, _sty, clsName) {
               if (item && item['className'] && $stys[item['className']]) {
                 itemStyleSheet = $stys[item['className']]['item'];
               }
-              var tempItem = myItemHeader(item, $stys, itemStyleSheet);
+              var tempItem = myItemHeader(item, $stys, itemStyleSheet, listClassName);
               return React.cloneElement(tempItem, { key: $key });
             }
           }
@@ -104,7 +105,7 @@ function dealWithLis(lis, $stys, _sty, clsName) {
   );
 }
 
-function myItemHeader(item, _stys, _sty) {
+function myItemHeader(item, _stys, _sty, listClassName) {
   var $header = void 0;
   var $lis = void 0;
   var $stys = JSON.parse(JSON.stringify(_stys));
@@ -134,8 +135,9 @@ function myItemHeader(item, _stys, _sty) {
     var _sty_img = $stys.itemImg || {};
     var _sty_box = $stys.itemBox || {};
 
-    if (className && $stys[className]) {
-      var $clsName = $stys[className];
+    var myClsName = className || listClassName;
+    if (myClsName) {
+      var $clsName = $stys[myClsName];
       _sty_a = $clsName['itemA'] || _sty_a;
       _sty_text = $clsName['itemText'] || _sty_text;
       _sty_img = $clsName['itemImg'] || _sty_img;
@@ -160,7 +162,7 @@ function myItemHeader(item, _stys, _sty) {
         );
         if (typeof img == 'string') {
           if (li) {
-            $lis = dealWithLis(li, $stys, _sty, className);
+            $lis = dealWithLis(li, $stys, _sty, className, listClassName);
             // title url img li
             // $header = <Div style={_sty_box}>{title}<A href={url} style={_sty_a}><Img src={img} style={_sty_img}/></A>{$lis}</Div>
             return React.createElement(
@@ -184,7 +186,7 @@ function myItemHeader(item, _stys, _sty) {
             );
           }
         } else if (li) {
-          $lis = dealWithLis(li, $stys, _sty, className);
+          $lis = dealWithLis(li, $stys, _sty, className, listClassName);
           // title url li
           // $header = <Div style={_sty_box}><A href={url} style={_sty_a}>{title}</A>{$lis}</Div>
           return React.createElement(
@@ -201,7 +203,7 @@ function myItemHeader(item, _stys, _sty) {
       } else if (img) {
         // if (typeof img=='string') {
         if (li) {
-          $lis = dealWithLis(li, $stys, _sty, className);
+          $lis = dealWithLis(li, $stys, _sty, className, listClassName);
           // title img li 
           // $header = <Div style={_sty_box}>{title}<Img src={img} style={_sty_img} />{$lis}</Div>
           return React.createElement(
@@ -222,7 +224,7 @@ function myItemHeader(item, _stys, _sty) {
           );
         }
       } else if (li) {
-        $lis = dealWithLis(li, $stys, _sty, className);
+        $lis = dealWithLis(li, $stys, _sty, className, listClassName);
 
         // title li
         // $header = <Div style={_sty_box}>{title}{$lis}</Div>
@@ -244,7 +246,7 @@ function myItemHeader(item, _stys, _sty) {
     else if (typeof img == 'string') {
         if (url && typeof url == 'string') {
           if (li) {
-            $lis = dealWithLis(li, $stys, _sty, className);
+            $lis = dealWithLis(li, $stys, _sty, className, listClassName);
             // img url li
             // $header = <Div style={_sty_box}><A href={url} style={_sty_a}><Img src={img} style={_sty_img} /></A>{$lis}</Div>
             return React.createElement(
@@ -266,7 +268,7 @@ function myItemHeader(item, _stys, _sty) {
             );
           }
         } else if (li) {
-          $lis = dealWithLis(li, $stys, _sty, className);
+          $lis = dealWithLis(li, $stys, _sty, className, listClassName);
           // img li
           // $header = <Div style={_sty_box}><Img src={img} style={_sty_img} />{$lis}</Div>
           return React.createElement(
@@ -284,7 +286,7 @@ function myItemHeader(item, _stys, _sty) {
       // ======
 
       else if (li) {
-          $lis = dealWithLis(li, $stys, _sty, className);
+          $lis = dealWithLis(li, $stys, _sty, className, listClassName);
           // li
           $header = $lis;
         }
@@ -349,7 +351,7 @@ var Fox = function (_React$Component) {
   }, {
     key: 'preRender',
     value: function preRender() {
-      return myItemHeader(this.props.item, this.props.styles, this.props.style);
+      return myItemHeader(this.props.item, this.props.styles, this.props.style, this.props.className);
     }
   }, {
     key: 'render',
@@ -410,13 +412,13 @@ module.exports = function (item, stys, props) {
   if (item.itemStyle) {
     var _itemSty2 = item.itemStyle.item;
     itemSty = [itemSty, _itemSty2];
-    // delete item.itemStyle.item
   }
 
-  if (item.className && $$itemStyle[item.className]) {
-    itemSty = $$itemStyle[item.className]['item'] || itemSty;
+  var myClsName = item.className || props.className;
+  if (myClsName) {
+    itemSty = $$itemStyle[myClsName]['item'] || itemSty;
   }
 
-  return React.createElement(Fox, { style: itemSty, styles: $$itemStyle, itemMethod: theMethod, item: item });
+  return React.createElement(Fox, { style: itemSty, styles: $$itemStyle, className: props.className, itemMethod: theMethod, item: item });
 };
 //# sourceMappingURL=maps/item.js.map

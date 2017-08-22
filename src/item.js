@@ -23,13 +23,14 @@ const $uuid = function(prefix='native_') {
   return prefix + _time
 }
 
-function dealWithLis(lis, $stys, _sty, clsName){
+function dealWithLis(lis, $stys, _sty, clsName, listClassName){
   let _sty_ul = $stys['ul']||$stys['itemLi-ul']||{}
   let _sty_li = $stys['li']||$stys['itemLi-li']||{}
   let _sty_text = $stys.itemText ||{}
 
-  if (clsName && $stys[clsName]) {
-    const $clsName = $stys[clsName]
+  const myClsName = clsName || listClassName
+  if (myClsName) {
+    const $clsName = $stys[myClsName]
     _sty_ul = $clsName['ul'] || $clsName['itemLi-ul'] || _sty_ul
     _sty_li = $clsName['li'] || $clsName['itemLi-li'] || _sty_li
     _sty_text = $clsName['itemText'] || _sty_text
@@ -51,7 +52,7 @@ function dealWithLis(lis, $stys, _sty, clsName){
           break;
         case 'object':
           if (Array.isArray(item)) {
-            return dealWithLis(item, $stys, _sty, clsName)
+            return dealWithLis(item, $stys, _sty, clsName, listClassName)
           } else {
             if (React.isValidElement(item)) {
               return React.cloneElement(item, {key: $key})
@@ -60,7 +61,7 @@ function dealWithLis(lis, $stys, _sty, clsName){
               if (item && item['className'] && $stys[item['className']]) {
                 itemStyleSheet = $stys[item['className']]['item']
               }
-              const tempItem = myItemHeader(item, $stys, itemStyleSheet)
+              const tempItem = myItemHeader(item, $stys, itemStyleSheet, listClassName)
               return React.cloneElement(tempItem, {key: $key})
             }
           }
@@ -72,7 +73,7 @@ function dealWithLis(lis, $stys, _sty, clsName){
   return <Ul style={_sty_ul}>{$lis}</Ul>
 }
 
-function myItemHeader(item, _stys, _sty){
+function myItemHeader(item, _stys, _sty, listClassName){
   let $header
   let $lis
   let $stys = JSON.parse(JSON.stringify(_stys))
@@ -93,14 +94,14 @@ function myItemHeader(item, _stys, _sty){
     let _sty_img = $stys.itemImg ||{}
     let _sty_box = $stys.itemBox ||{}
 
-    if (className && $stys[className]) {
-      const $clsName = $stys[className]
+    const myClsName = className || listClassName
+    if (myClsName) {
+      const $clsName = $stys[myClsName]
       _sty_a = $clsName['itemA'] || _sty_a
       _sty_text = $clsName['itemText'] || _sty_text
       _sty_img = $clsName['itemImg'] || _sty_img
       _sty_box = $clsName['itemBox'] || _sty_box
     }
-    
 
     if (title) {
       if (typeof title == 'number' || typeof title == 'string') {
@@ -112,7 +113,7 @@ function myItemHeader(item, _stys, _sty){
         $header = <A href={url} style={_sty_a}>{title}</A>
         if (typeof img=='string') {
           if (li) {
-            $lis = dealWithLis(li, $stys, _sty, className)
+            $lis = dealWithLis(li, $stys, _sty, className, listClassName)
             // title url img li
             // $header = <Div style={_sty_box}>{title}<A href={url} style={_sty_a}><Img src={img} style={_sty_img}/></A>{$lis}</Div>
             return <Div style={_sty}>{title}<A href={url} style={_sty_a}><Img src={img} style={_sty_img}/></A>{$lis}</Div>
@@ -123,7 +124,7 @@ function myItemHeader(item, _stys, _sty){
         }
         else
         if (li) {
-          $lis = dealWithLis(li, $stys, _sty, className)
+          $lis = dealWithLis(li, $stys, _sty, className, listClassName)
           // title url li
           // $header = <Div style={_sty_box}><A href={url} style={_sty_a}>{title}</A>{$lis}</Div>
           return <Div style={_sty}><A href={url} style={_sty_a}>{title}</A>{$lis}</Div>
@@ -133,7 +134,7 @@ function myItemHeader(item, _stys, _sty){
       if (img) {
         // if (typeof img=='string') {
         if (li) {
-          $lis = dealWithLis(li, $stys, _sty, className)
+          $lis = dealWithLis(li, $stys, _sty, className, listClassName)
           // title img li 
           // $header = <Div style={_sty_box}>{title}<Img src={img} style={_sty_img} />{$lis}</Div>
           return <Div style={_sty}>{title}<Img src={img} style={_sty_img} />{$lis}</Div>
@@ -145,7 +146,7 @@ function myItemHeader(item, _stys, _sty){
       }
       else
       if (li) {
-        $lis = dealWithLis(li, $stys, _sty, className)
+        $lis = dealWithLis(li, $stys, _sty, className, listClassName)
         
         // title li
         // $header = <Div style={_sty_box}>{title}{$lis}</Div>
@@ -163,7 +164,7 @@ function myItemHeader(item, _stys, _sty){
     if (typeof img=='string') {
       if (url&&typeof url == 'string') {
         if (li) {
-          $lis = dealWithLis(li, $stys, _sty, className)
+          $lis = dealWithLis(li, $stys, _sty, className, listClassName)
           // img url li
           // $header = <Div style={_sty_box}><A href={url} style={_sty_a}><Img src={img} style={_sty_img} /></A>{$lis}</Div>
           return <Div style={_sty}><A href={url} style={_sty_a}><Img src={img} style={_sty_img} /></A>{$lis}</Div>
@@ -174,7 +175,7 @@ function myItemHeader(item, _stys, _sty){
       }
       else
       if (li) {
-        $lis = dealWithLis(li, $stys, _sty, className)
+        $lis = dealWithLis(li, $stys, _sty, className, listClassName)
         // img li
         // $header = <Div style={_sty_box}><Img src={img} style={_sty_img} />{$lis}</Div>
         return <Div style={_sty}><Img src={img} style={_sty_img} />{$lis}</Div>
@@ -188,7 +189,7 @@ function myItemHeader(item, _stys, _sty){
 
     else
     if (li) {
-      $lis = dealWithLis(li, $stys, _sty, className)
+      $lis = dealWithLis(li, $stys, _sty, className, listClassName)
       // li
       $header = $lis
     }
@@ -239,7 +240,7 @@ class Fox extends React.Component {
   }
 
   preRender(){
-    return myItemHeader(this.props.item, this.props.styles, this.props.style)
+    return myItemHeader(this.props.item, this.props.styles, this.props.style, this.props.className)
   }
 
   render(){
@@ -294,12 +295,12 @@ module.exports = function(item, stys, props){
   if (item.itemStyle) {
     const __itemSty = item.itemStyle.item
     itemSty = [itemSty, __itemSty]
-    // delete item.itemStyle.item
   }
 
-  if (item.className && $$itemStyle[item.className]) {
-    itemSty = $$itemStyle[item.className]['item'] || itemSty
+  const myClsName = item.className || props.className
+  if (myClsName) {
+    itemSty = $$itemStyle[myClsName]['item'] || itemSty
   }
 
-  return <Fox style={itemSty} styles={$$itemStyle} itemMethod={theMethod} item={item} />
+  return <Fox style={itemSty} styles={$$itemStyle} className={props.className} itemMethod={theMethod} item={item} />
 }

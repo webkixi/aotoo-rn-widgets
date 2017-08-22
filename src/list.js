@@ -103,6 +103,7 @@ function _list(props, stys){
 
   var listSty = $props.horizontal ? 'list-h' : 'list-v'
   listSty = stys[listSty]
+
   if (props.listStyle || stys.listStyle) {
     var _listStyle = merge(props.listStyle, stys.listStyle)
     listSty = [listSty, _listStyle]
@@ -110,7 +111,7 @@ function _list(props, stys){
 
   if (props.className) {
     if (stys[props.className]) {
-      listSty = stys[props.className]['item']
+      listSty = stys[props.className]['listStyle']
     }
   }
 
