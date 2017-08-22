@@ -121,7 +121,7 @@ function _list(props, stys) {
 
   if (props.className) {
     if (stys[props.className]) {
-      listSty = stys[props.className];
+      listSty = stys[props.className]['item'];
     }
   }
 
