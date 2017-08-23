@@ -275,6 +275,12 @@ var $itemStyle = {
 }
 
 module.exports = function(item, stys, props){
+  if (React.isValidElement(item)) return item
+
+  if (typeof item == 'string' || typeof item == 'number') {
+    item = {title: item}
+  }
+  
   const theMethod = item.itemMethod || props&&props.itemMethod
   delete item.itemMethod
 
