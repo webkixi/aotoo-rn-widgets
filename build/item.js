@@ -87,7 +87,7 @@ function dealWithLis(lis, $stys, _sty, clsName, listClassName) {
             } else {
               var itemStyleSheet = $stys['item'] || {};
               if (item && item['className'] && $stys[item['className']]) {
-                itemStyleSheet = $stys[item['className']]['item'];
+                itemStyleSheet = $stys[item['className']] && $stys[item['className']]['item'] || itemStyleSheet;
               }
               var tempItem = myItemHeader(item, $stys, itemStyleSheet, listClassName);
               return React.cloneElement(tempItem, { key: $key });
@@ -422,7 +422,7 @@ module.exports = function (item, stys, props) {
 
   var myClsName = item.className || props.className;
   if (myClsName) {
-    itemSty = $$itemStyle[myClsName]['item'] || itemSty;
+    itemSty = $$itemStyle[myClsName] && $$itemStyle[myClsName]['item'] || itemSty;
   }
 
   return React.createElement(Fox, { style: itemSty, styles: $$itemStyle, className: props.className, itemMethod: theMethod, item: item });
