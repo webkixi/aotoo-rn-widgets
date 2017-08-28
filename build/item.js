@@ -85,9 +85,20 @@ function dealWithLis(lis, $stys, _sty, clsName, listClassName) {
             if (React.isValidElement(item)) {
               return React.cloneElement(item, { key: $key });
             } else {
-              var itemStyleSheet = $stys['item'] || {};
-              if (item && item['className'] && $stys[item['className']]) {
-                itemStyleSheet = $stys[item['className']]['item'];
+              // let itemStyleSheet = $stys['item'] || {}
+              // if (item && item['className'] && $stys[item['className']]) {
+              //   itemStyleSheet = $stys[item['className']]['item']
+              // }
+
+              var itemStyleSheet = _sty_li;
+              if (item && (item['style'] || item['itemStyle'])) {
+                itemStyleSheet = item['style'] || item['itemStyle'];
+              }
+
+              var theClsName = item['className'];
+
+              if (item && theClsName && $stys[theClsName]) {
+                itemStyleSheet = $stys[theClsName]['item'] || itemStyleSheet;
               }
               var tempItem = myItemHeader(item, $stys, itemStyleSheet, listClassName);
               return React.cloneElement(tempItem, { key: $key });

@@ -28,7 +28,7 @@ function dealWithLis(lis, $stys, _sty, clsName, listClassName){
   let _sty_li = $stys['li']||$stys['itemLi-li']||{}
   let _sty_text = $stys.itemText ||{}
 
-  const myClsName = clsName || listClassName
+  let myClsName = clsName || listClassName
   if (myClsName) {
     const $clsName = $stys[myClsName]
     _sty_ul = $clsName['ul'] || $clsName['itemLi-ul'] || _sty_ul
@@ -57,9 +57,20 @@ function dealWithLis(lis, $stys, _sty, clsName, listClassName){
             if (React.isValidElement(item)) {
               return React.cloneElement(item, {key: $key})
             } else {
-              let itemStyleSheet = $stys['item'] || {}
-              if (item && item['className'] && $stys[item['className']]) {
-                itemStyleSheet = $stys[item['className']]['item']
+              // let itemStyleSheet = $stys['item'] || {}
+              // if (item && item['className'] && $stys[item['className']]) {
+              //   itemStyleSheet = $stys[item['className']]['item']
+              // }
+
+              let itemStyleSheet = _sty_li
+              if (item && (item['style'] || item['itemStyle']) ) {
+                itemStyleSheet = item['style'] || item['itemStyle']
+              }
+
+              const theClsName = item['className']
+
+              if (item && theClsName && $stys[theClsName]) {
+                itemStyleSheet = $stys[theClsName]['item'] || itemStyleSheet
               }
               const tempItem = myItemHeader(item, $stys, itemStyleSheet, listClassName)
               return React.cloneElement(tempItem, {key: $key})
