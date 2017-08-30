@@ -30,10 +30,19 @@ function dealWithLis(lis, $stys, _sty, clsName, listClassName){
 
   let myClsName = clsName || listClassName
   if (myClsName) {
-    const $clsName = $stys[myClsName]
+    const clsNames = myClsName.split(' ')
+    const myItemSty = clsNames.map( cn=>{
+      return $stys[cn]||{}
+    })
+    const $clsName = Aotoo.merge(...myItemSty)
     _sty_ul = $clsName['ul'] || $clsName['itemLi-ul'] || _sty_ul
     _sty_li = $clsName['li'] || $clsName['itemLi-li'] || _sty_li
     _sty_text = $clsName['itemText'] || _sty_text
+
+    // const $clsName = $stys[myClsName]
+    // _sty_ul = $clsName['ul'] || $clsName['itemLi-ul'] || _sty_ul
+    // _sty_li = $clsName['li'] || $clsName['itemLi-li'] || _sty_li
+    // _sty_text = $clsName['itemText'] || _sty_text
   }
 
   var $lis = []
@@ -69,8 +78,14 @@ function dealWithLis(lis, $stys, _sty, clsName, listClassName){
 
               const theClsName = item['className']
 
-              if (item && theClsName && $stys[theClsName]) {
-                itemStyleSheet = $stys[theClsName]['item'] || itemStyleSheet
+              if (item && theClsName) {
+                const clsNames = theClsName.split(' ')
+                const myItemSty = clsNames.map( cn=>{
+                  return $stys[cn]||{}
+                })
+                const $clsName = Aotoo.merge(...myItemSty)
+                itemStyleSheet = $clsName['item'] || itemStyleSheet
+                // itemStyleSheet = $stys[theClsName]['item'] || itemStyleSheet
               }
               const tempItem = myItemHeader(item, $stys, itemStyleSheet, listClassName)
               return React.cloneElement(tempItem, {key: $key})
@@ -98,7 +113,7 @@ function myItemHeader(item, _stys, _sty, listClassName){
     $header = <Text style={$sty}>{item}</Text>
   }
   else {
-    let { title, url, img, id, li, itemStyle, attr, className } = item
+    let { title, url, img, id, li, itemStyle, attr, className, attr } = item
     $stys = merge($stys, itemStyle)
     let _sty_a = $stys.itemA || {}
     let _sty_text = $stys.itemText ||{}
@@ -107,11 +122,22 @@ function myItemHeader(item, _stys, _sty, listClassName){
 
     const myClsName = className || listClassName
     if (myClsName) {
-      const $clsName = $stys[myClsName]
+      const clsNames = myClsName.split(' ')
+      const myItemSty = clsNames.map( cn=>{
+        return $stys[cn]||{}
+      })
+      const $clsName = Aotoo.merge(...myItemSty)
       _sty_a = $clsName['itemA'] || _sty_a
       _sty_text = $clsName['itemText'] || _sty_text
       _sty_img = $clsName['itemImg'] || _sty_img
       _sty_box = $clsName['itemBox'] || _sty_box
+
+
+      // const $clsName = $stys[myClsName]
+      // _sty_a = $clsName['itemA'] || _sty_a
+      // _sty_text = $clsName['itemText'] || _sty_text
+      // _sty_img = $clsName['itemImg'] || _sty_img
+      // _sty_box = $clsName['itemBox'] || _sty_box
     }
 
     if (title) {
@@ -121,16 +147,16 @@ function myItemHeader(item, _stys, _sty, listClassName){
       // if (url&&typeof url == 'string') {
       if (url) {
         // title url
-        $header = <A href={url} style={_sty_a}>{title}</A>
+        $header = <A attr={attr} href={url} style={_sty_a}>{title}</A>
         if (typeof img=='string') {
           if (li) {
             $lis = dealWithLis(li, $stys, _sty, className, listClassName)
             // title url img li
             // $header = <Div style={_sty_box}>{title}<A href={url} style={_sty_a}><Img src={img} style={_sty_img}/></A>{$lis}</Div>
-            return <Div style={_sty}>{title}<A href={url} style={_sty_a}><Img src={img} style={_sty_img}/></A>{$lis}</Div>
+            return <Div style={_sty}>{title}<A attr={attr} href={url} style={_sty_a}><Img src={img} style={_sty_img}/></A>{$lis}</Div>
           } else {
             // title url img
-            $header = <A href={url} style={_sty_a}>{title}<Img src={img} style={_sty_img}/></A>
+            $header = <A attr={attr} href={url} style={_sty_a}>{title}<Img src={img} style={_sty_img}/></A>
           }
         }
         else
@@ -138,7 +164,7 @@ function myItemHeader(item, _stys, _sty, listClassName){
           $lis = dealWithLis(li, $stys, _sty, className, listClassName)
           // title url li
           // $header = <Div style={_sty_box}><A href={url} style={_sty_a}>{title}</A>{$lis}</Div>
-          return <Div style={_sty}><A href={url} style={_sty_a}>{title}</A>{$lis}</Div>
+          return <Div style={_sty}><A attr={attr} href={url} style={_sty_a}>{title}</A>{$lis}</Div>
         }
       }
       else
@@ -178,10 +204,10 @@ function myItemHeader(item, _stys, _sty, listClassName){
           $lis = dealWithLis(li, $stys, _sty, className, listClassName)
           // img url li
           // $header = <Div style={_sty_box}><A href={url} style={_sty_a}><Img src={img} style={_sty_img} /></A>{$lis}</Div>
-          return <Div style={_sty}><A href={url} style={_sty_a}><Img src={img} style={_sty_img} /></A>{$lis}</Div>
+          return <Div style={_sty}><A attr={attr} href={url} style={_sty_a}><Img src={img} style={_sty_img} /></A>{$lis}</Div>
         } else {
           // img url
-          $header = <A href={url} style={_sty_a}><Img src={img} style={_sty_img} /></A>
+          $header = <A attr={attr} href={url} style={_sty_a}><Img src={img} style={_sty_img} /></A>
         }
       }
       else
@@ -316,7 +342,13 @@ module.exports = function(item, stys, props){
 
   const myClsName = item.className || props.className
   if (myClsName) {
-    itemSty = $$itemStyle[myClsName]['item'] || itemSty
+    // itemSty = $$itemStyle[myClsName]['item'] || itemSty
+
+    const clsNames = myClsName.split(' ')
+    const myItemSty = clsNames.map( cn=>{
+      return $$itemStyle[cn]['item'] || itemSty
+    })
+    itemSty = myItemSty
   }
 
   return <Fox style={itemSty} styles={$$itemStyle} className={props.className} itemMethod={theMethod} item={item} />

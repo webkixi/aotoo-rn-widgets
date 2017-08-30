@@ -10,6 +10,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var uniqueId = Aotoo.uniqueId;
 var merge = Aotoo.merge;
 
@@ -42,10 +44,21 @@ function dealWithLis(lis, $stys, _sty, clsName, listClassName) {
 
   var myClsName = clsName || listClassName;
   if (myClsName) {
-    var $clsName = $stys[myClsName];
+    var _Aotoo;
+
+    var clsNames = myClsName.split(' ');
+    var myItemSty = clsNames.map(function (cn) {
+      return $stys[cn] || {};
+    });
+    var $clsName = (_Aotoo = Aotoo).merge.apply(_Aotoo, _toConsumableArray(myItemSty));
     _sty_ul = $clsName['ul'] || $clsName['itemLi-ul'] || _sty_ul;
     _sty_li = $clsName['li'] || $clsName['itemLi-li'] || _sty_li;
     _sty_text = $clsName['itemText'] || _sty_text;
+
+    // const $clsName = $stys[myClsName]
+    // _sty_ul = $clsName['ul'] || $clsName['itemLi-ul'] || _sty_ul
+    // _sty_li = $clsName['li'] || $clsName['itemLi-li'] || _sty_li
+    // _sty_text = $clsName['itemText'] || _sty_text
   }
 
   var $lis = [];
@@ -97,8 +110,16 @@ function dealWithLis(lis, $stys, _sty, clsName, listClassName) {
 
               var theClsName = item['className'];
 
-              if (item && theClsName && $stys[theClsName]) {
-                itemStyleSheet = $stys[theClsName]['item'] || itemStyleSheet;
+              if (item && theClsName) {
+                var _Aotoo2;
+
+                var _clsNames = theClsName.split(' ');
+                var _myItemSty = _clsNames.map(function (cn) {
+                  return $stys[cn] || {};
+                });
+                var _$clsName = (_Aotoo2 = Aotoo).merge.apply(_Aotoo2, _toConsumableArray(_myItemSty));
+                itemStyleSheet = _$clsName['item'] || itemStyleSheet;
+                // itemStyleSheet = $stys[theClsName]['item'] || itemStyleSheet
               }
               var tempItem = myItemHeader(item, $stys, itemStyleSheet, listClassName);
               return React.cloneElement(tempItem, { key: $key });
@@ -148,11 +169,23 @@ function myItemHeader(item, _stys, _sty, listClassName) {
 
     var myClsName = className || listClassName;
     if (myClsName) {
-      var $clsName = $stys[myClsName];
+      var _Aotoo3;
+
+      var clsNames = myClsName.split(' ');
+      var myItemSty = clsNames.map(function (cn) {
+        return $stys[cn] || {};
+      });
+      var $clsName = (_Aotoo3 = Aotoo).merge.apply(_Aotoo3, _toConsumableArray(myItemSty));
       _sty_a = $clsName['itemA'] || _sty_a;
       _sty_text = $clsName['itemText'] || _sty_text;
       _sty_img = $clsName['itemImg'] || _sty_img;
       _sty_box = $clsName['itemBox'] || _sty_box;
+
+      // const $clsName = $stys[myClsName]
+      // _sty_a = $clsName['itemA'] || _sty_a
+      // _sty_text = $clsName['itemText'] || _sty_text
+      // _sty_img = $clsName['itemImg'] || _sty_img
+      // _sty_box = $clsName['itemBox'] || _sty_box
     }
 
     if (title) {
@@ -433,7 +466,13 @@ module.exports = function (item, stys, props) {
 
   var myClsName = item.className || props.className;
   if (myClsName) {
-    itemSty = $$itemStyle[myClsName]['item'] || itemSty;
+    // itemSty = $$itemStyle[myClsName]['item'] || itemSty
+
+    var clsNames = myClsName.split(' ');
+    var myItemSty = clsNames.map(function (cn) {
+      return $$itemStyle[cn]['item'] || itemSty;
+    });
+    itemSty = myItemSty;
   }
 
   return React.createElement(Fox, { style: itemSty, styles: $$itemStyle, className: props.className, itemMethod: theMethod, item: item });

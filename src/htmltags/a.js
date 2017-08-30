@@ -20,6 +20,7 @@ class A extends React.PureComponent {
     }
 
     const url = this.props.href
+    const attr = this.props.attr||{}
     var actions = function(params){}
     if (typeof url == 'string') {
       actions = ()=>Linking.canOpenURL(url).then(supported => {
@@ -32,7 +33,7 @@ class A extends React.PureComponent {
     }
 
     if (typeof url == 'function') {
-      actions = url
+      actions = url.bind({attr: attr})
     }
 
     const children = ( child => {
