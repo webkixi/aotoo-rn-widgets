@@ -201,7 +201,7 @@ function myItemHeader(item, _stys, _sty, listClassName) {
         // title url
         $header = React.createElement(
           A,
-          { href: url, style: _sty_a },
+          { attr: attr, href: url, style: _sty_a },
           title
         );
         if (typeof img == 'string') {
@@ -215,7 +215,7 @@ function myItemHeader(item, _stys, _sty, listClassName) {
               title,
               React.createElement(
                 A,
-                { href: url, style: _sty_a },
+                { attr: attr, href: url, style: _sty_a },
                 React.createElement(Img, { src: img, style: _sty_img })
               ),
               $lis
@@ -224,7 +224,7 @@ function myItemHeader(item, _stys, _sty, listClassName) {
             // title url img
             $header = React.createElement(
               A,
-              { href: url, style: _sty_a },
+              { attr: attr, href: url, style: _sty_a },
               title,
               React.createElement(Img, { src: img, style: _sty_img })
             );
@@ -238,7 +238,7 @@ function myItemHeader(item, _stys, _sty, listClassName) {
             { style: _sty },
             React.createElement(
               A,
-              { href: url, style: _sty_a },
+              { attr: attr, href: url, style: _sty_a },
               title
             ),
             $lis
@@ -298,7 +298,7 @@ function myItemHeader(item, _stys, _sty, listClassName) {
               { style: _sty },
               React.createElement(
                 A,
-                { href: url, style: _sty_a },
+                { attr: attr, href: url, style: _sty_a },
                 React.createElement(Img, { src: img, style: _sty_img })
               ),
               $lis
@@ -307,7 +307,7 @@ function myItemHeader(item, _stys, _sty, listClassName) {
             // img url
             $header = React.createElement(
               A,
-              { href: url, style: _sty_a },
+              { attr: attr, href: url, style: _sty_a },
               React.createElement(Img, { src: img, style: _sty_img })
             );
           }

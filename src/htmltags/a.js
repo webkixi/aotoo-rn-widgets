@@ -33,7 +33,7 @@ class A extends React.PureComponent {
     }
 
     if (typeof url == 'function') {
-      actions = url.bind({attr: attr})
+      actions = url
     }
 
     const children = ( child => {
@@ -46,6 +46,7 @@ class A extends React.PureComponent {
 
     return (
       <TouchableHighlight
+        attr={attr}
         style={style}
         onPress={actions}
         {..._props}

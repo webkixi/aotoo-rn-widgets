@@ -41,6 +41,7 @@ var A = function (_React$PureComponent) {
       }
 
       var url = this.props.href;
+      var attr = this.props.attr || {};
       var actions = function actions(params) {};
       if (typeof url == 'string') {
         actions = function actions() {
@@ -73,6 +74,7 @@ var A = function (_React$PureComponent) {
       return React.createElement(
         TouchableHighlight,
         _extends({
+          attr: attr,
           style: style,
           onPress: actions
         }, _props),

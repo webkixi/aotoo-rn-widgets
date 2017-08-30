@@ -113,7 +113,7 @@ function myItemHeader(item, _stys, _sty, listClassName){
     $header = <Text style={$sty}>{item}</Text>
   }
   else {
-    let { title, url, img, id, li, itemStyle, attr, className, attr } = item
+    let { title, url, img, id, li, itemStyle, attr, className } = item
     $stys = merge($stys, itemStyle)
     let _sty_a = $stys.itemA || {}
     let _sty_text = $stys.itemText ||{}
