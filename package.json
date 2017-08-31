@@ -1,6 +1,6 @@
 {
   "name": "aotoo-rn-widgets",
-  "version": "1.0.17-beta1",
+  "version": "1.0.18",
   "description": "aotoo rn 元件",
   "main": "./build/index.js",
   "license": "MIT",
